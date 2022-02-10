@@ -1,11 +1,17 @@
-import * as express from 'express';
-import {Request, Response} from "express";
-import { json } from "body-parser";
-const app = express();
+import express, { Application, Request, Response } from 'express'
+import router from "./api/routes";
 
-app.use(json());
+const app: Application = express()
 
-app.use((err: Error, req: Request, res: Response) => res.status(500).json({message: err.message}))
+// Body parsing Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/', async(req: Request, res: Response): Promise<Response> => {
+    return res.status(200).send({ message: 'Welcome to the Booking API'})
+})
+
+app.use('/api/v1', router);
 
 export default app
 

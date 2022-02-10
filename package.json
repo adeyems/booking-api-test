@@ -10,11 +10,11 @@
   "author": "Adeyemo Qudus <adeyems@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "mysql2": "^2.2.5",
+    "sequelize": "^6.16.1",
     "winston": "^3.3.3"
   },
   "devDependencies": {
