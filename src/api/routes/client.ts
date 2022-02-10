@@ -1,11 +1,16 @@
 import {Router} from "express";
-import UsersController from "../controllers/user/UsersController";
-import UserRepository from "../../db/repositories/UseRepository";
+import BookingController from "../controllers/booking/BookingController";
+import BookingRepository from "../../db/repositories/BookingRepository";
+import {isAdmin} from "../middlewares/requests/is-admin";
+import SchedulerController from "../controllers/SchedulerController";
 
-const usersRouter = Router();
+const clientRouter = Router();
 
-const userController = new UsersController(new UserRepository)
+const bookingController = new BookingController(new BookingRepository)
+const schedulerController = new SchedulerController(new BookingRepository)
 
-usersRouter.post('/', userController.createUser);
+clientRouter.get('/scheduler', schedulerController.getBooking);
+clientRouter.post('/booking', isAdmin, bookingController.createBooking);
+clientRouter.delete('/booking/:id', isAdmin, bookingController.deleteBooking);
 
-export default usersRouter;
+export default clientRouter;

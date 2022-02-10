@@ -19,6 +19,15 @@ class UsersController {
             return errorResponse(res, responseCode.INTERNAL_SERVER_ERROR, error)
         }
     }
+
+    getUsers =  async (req: Request, res: Response) => {
+        try {
+            return successResponse(res, responseCode.CREATED, 'Users', await this.userRepository.getAll());
+        }
+        catch (error) {
+            return errorResponse(res, responseCode.INTERNAL_SERVER_ERROR, error)
+        }
+    }
 }
 
 export default UsersController

@@ -2,31 +2,33 @@ import { DataTypes, Model, Optional} from "sequelize";
 import sequelizeConnection from "../config";
 import Booking from "./Booking";
 
-interface UserAttributes {
+interface AgentAttributes {
     id: number;
     name: string;
     email: string;
     has_many_bookings?: boolean,
+    has_many_users?: boolean,
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
 }
-export interface UserInput extends Optional<UserAttributes, 'id'> {}
+export interface AgentInput extends Optional<AgentAttributes, 'id'> {}
 
-export interface UserOutput extends Required<UserAttributes> {}
+export interface AgentOutput extends Required<AgentAttributes> {}
 
-class User extends Model<UserAttributes, UserInput> implements UserAttributes {
+class Agent extends Model<AgentAttributes, AgentInput> implements AgentAttributes {
     public id!: number
     public name!: string
     public email!: string
 
     public has_many_bookings!: boolean
+    public has_many_users!: boolean
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
 }
 
-User.init({
+Agent.init({
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
@@ -44,11 +46,14 @@ User.init({
     has_many_bookings: {
         type: DataTypes.BOOLEAN,
     },
+    has_many_users: {
+        type: DataTypes.BOOLEAN,
+    },
 }, {
     sequelize: sequelizeConnection,
     paranoid: true
 })
 
-//User.hasMany(Booking);
+// Agent.hasMany(Booking);
 
-export default User
+export default Agent

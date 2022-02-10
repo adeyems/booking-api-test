@@ -1,4 +1,4 @@
-export type CreateUserDTO = {
+export type CreateAgentDTO = {
     name: string;
     email: string;
 }

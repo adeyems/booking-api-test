@@ -1,10 +1,9 @@
 import {Router} from "express";
-import BusinessesController from "../controllers/business/businessesController";
+import {successResponse} from "../../utils";
 
 const businessRouter = Router();
 
-const businessController = new BusinessesController()
+businessRouter.get('/scheduler', (req, res) => successResponse(res))
 
-businessRouter.get('/scheduler', businessController.scheduler);
 
 export default businessRouter;
